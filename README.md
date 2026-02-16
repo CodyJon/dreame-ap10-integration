@@ -2,14 +2,14 @@
 
 Custom Home Assistant integration for the **Dreame AP-10 Air Purifier**.
 
-This component lets you control your Dreame AP-10 locally and view real-time air quality data right in Home Assistant.
+Control your purifier locally with real-time air quality data — no constant cloud dependency after initial setup.
 
 ## Features
-- Fan entity: on/off, speed levels, modes, oscillation (if supported by device)
-- Sensors: PM2.5, temperature, humidity, filter life percentage, air quality index
-- Switches: child lock, display, turbo mode, etc. (depending on your model/firmware)
-- Config flow UI setup (no YAML editing required)
-- Local communication (no cloud needed once set up)
+- Fan control: on/off, speeds, modes, oscillation (if supported)
+- Sensors: PM2.5, temperature, humidity, filter life, air quality
+- Switches: child lock, display, turbo, etc. (model-dependent)
+- UI config flow setup (no YAML needed)
+- Cloud login for easy discovery (uses Dreame app credentials)
 
 ## Installation
 
@@ -17,43 +17,42 @@ This component lets you control your Dreame AP-10 locally and view real-time air
 
 [![Add Repository to HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=CodyJon&repository=dreame-ap10-integration)
 
-1. Open **HACS → Integrations** in Home Assistant.
-2. Click the **⋮** (three dots) in the top right → **Custom repositories**.
-3. Paste this URL:  
-   `https://github.com/CodyJon/dreame-ap10-integration`
-4. Select **Integration** as the category → **Add**.
-5. Search for **"Dreame AP-10"** in the HACS Integrations list.
-6. Click **Download** → restart Home Assistant when prompted.
-7. Go to **Settings → Devices & Services → + Add Integration** → search "Dreame" → follow the config flow.
+1. In Home Assistant: **HACS → Integrations**.
+2. Click **⋮** (top right) → **Custom repositories**.
+3. Paste URL: `https://github.com/CodyJon/dreame-ap10-integration`
+4. Category: **Integration** → **Add**.
+5. Search **"Dreame AP-10"** → **Download** → restart HA.
+6. **Settings → Devices & Services → + Add Integration** → search "Dreame" → follow config flow.
 
 ### Manual Installation
-1. Download this repository as ZIP.
-2. Extract the `custom_components/dreame_airpurifier` folder to your Home Assistant config directory:  
-   `<config>/custom_components/dreame_airpurifier/`
-3. Restart Home Assistant.
-4. Add the integration via **Settings → Devices & Services → + Add Integration** → search "Dreame".
+1. Download repo ZIP.
+2. Copy `custom_components/dreame_airpurifier/` to `<config>/custom_components/`.
+3. Restart HA.
+4. Add via **Settings → Devices & Services → + Add Integration** → "Dreame".
 
 ## Setup
-- Make sure your Dreame AP-10 is connected to the same Wi-Fi network as Home Assistant.
-- During setup, you'll need the device's **local IP address** (find it in the Dreame app, your router's device list, or use a network scanner like Fing or Angry IP Scanner).
-- If you have multiple AP-10 units, add each one as a separate integration.
-- After setup, entities will appear like:
-  - `fan.dreame_ap10_living_room`
-  - `sensor.dreame_ap10_pm25`
-  - `sensor.dreame_ap10_filter_life`
+- Use your **Dreame app credentials** (email/phone + password) during config flow.
+  - These are the same as your login for the Dreamehome app.
+  - The integration logs in to discover your AP-10(s) automatically.
+- No manual IP or token needed — cloud login handles device binding and local access.
+- Multiple purifiers? Add each one separately if not auto-discovered.
+- Entities: `fan.dreame_ap10_xxxx`, `sensor.dreame_ap10_pm25`, etc.
 
 ## Troubleshooting
-- **Not discovering device?** Enter the IP manually during config flow.
-- **Connection errors?** Check that the device is powered on and not in cloud-only mode. Restart HA and the purifier.
-- **Values not updating?** Increase polling interval in advanced options if needed (default is usually fine).
-- Check **Developer Tools → Logs** for entries starting with `dreame_airpurifier` if something goes wrong.
+- **Login fails?** Double-check credentials in Dreame app (logout/login to verify). Reset password if needed.
+- **No devices found?** Ensure purifiers are online in Dreame app. Restart HA/purifier.
+- **Connection drops?** Check HA logs (Developer Tools → Logs → search "dreame_airpurifier") for errors.
+- Values not updating? Device may need wake-up (fan on/off via app) or increase polling in advanced options.
 
 ## Contributing
-Bugs, missing features, or improvements?  
-Please open an **Issue** or submit a **Pull Request** on GitHub.
+Issues, feature requests, or PRs welcome! Open on GitHub.
 
 ## License
 MIT License
+
+---
+
+Glad it's working — enjoy cleaner air with full HA control! ⭐ the repo if helpful.
 
 ---
 
