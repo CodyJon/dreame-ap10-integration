@@ -1,0 +1,19 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Dreame Air Purifier",
+        "description": "Enter your Dreamehome app credentials.",
+        "data": {
+          "username": "Email or Phone",
+          "password": "Password",
+          "country": "Server Region"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Invalid credentials",
+      "no_devices": "No air purifiers found on this account"
+    }
+  }
+}
