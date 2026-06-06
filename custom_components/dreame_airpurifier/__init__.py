@@ -9,7 +9,7 @@ from .api import DreameCloudAPI, DreameAirPurifier
 from .const import DOMAIN, SCAN_INTERVAL, CONF_COUNTRY
 
 _LOGGER = logging.getLogger(__name__)
-PLATFORMS = [Platform.FAN, Platform.SENSOR, Platform.SWITCH]
+PLATFORMS = [Platform.FAN, Platform.SENSOR, Platform.SWITCH, Platform.SELECT, Platform.NUMBER, Platform.BUTTON]
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     api = DreameCloudAPI(entry.data[CONF_USERNAME], entry.data[CONF_PASSWORD], entry.data.get(CONF_COUNTRY, "us"))
