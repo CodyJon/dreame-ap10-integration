@@ -16,7 +16,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     entities = []
     for p in data["purifiers"]:
         entities.extend([DreamePM25Sensor(data["coordinator"], p), DreameAirQualitySensor(data["coordinator"], p),
-                         DreameFilterLifeSensor(data["coordinator"], p), DreameFilterUsedSensor(data["coordinator"], p)])
+                         DreameFilterLifeSensor(data["coordinator"], p), DreameFilterDaysLeftSensor(data["coordinator"], p),
+                         DreameFilterUsedSensor(data["coordinator"], p), DreameDeviceLocationSensor(data["coordinator"], p)])
     async_add_entities(entities)
 
 class DreameBaseSensor(CoordinatorEntity, SensorEntity):
@@ -51,14 +52,28 @@ class DreameFilterLifeSensor(DreameBaseSensor):
     _attr_state_class = SensorStateClass.MEASUREMENT
     _attr_native_unit_of_measurement = PERCENTAGE
     _attr_icon = "mdi:air-filter"
-    def __init__(self, coordinator, purifier): super().__init__(coordinator, purifier, "filter_life", "Filter Life")
+    def __init__(self, coordinator, purifier): super().__init__(coordinator, purifier, "filter_life", "High Efficiency Composite Filter")
     @property
     def native_value(self): return self._purifier.filter_life
+
+class DreameFilterDaysLeftSensor(DreameBaseSensor):
+    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_native_unit_of_measurement = UnitOfTime.DAYS
+    _attr_icon = "mdi:calendar-clock"
+    def __init__(self, coordinator, purifier): super().__init__(coordinator, purifier, "filter_days_left", "High Efficiency Composite Filter Days Left")
+    @property
+    def native_value(self): return self._purifier.filter_days_left
 
 class DreameFilterUsedSensor(DreameBaseSensor):
     _attr_state_class = SensorStateClass.TOTAL_INCREASING
     _attr_native_unit_of_measurement = UnitOfTime.HOURS
     _attr_icon = "mdi:clock-outline"
-    def __init__(self, coordinator, purifier): super().__init__(coordinator, purifier, "filter_used", "Filter Hours Used")
+    def __init__(self, coordinator, purifier): super().__init__(coordinator, purifier, "filter_used", "High Efficiency Composite Filter Hours Used")
     @property
     def native_value(self): return self._purifier.filter_hours_used
+
+class DreameDeviceLocationSensor(DreameBaseSensor):
+    _attr_icon = "mdi:map-marker"
+    def __init__(self, coordinator, purifier): super().__init__(coordinator, purifier, "device_location", "Device Location")
+    @property
+    def native_value(self): return self._purifier.device_location
