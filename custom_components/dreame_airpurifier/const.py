@@ -4,6 +4,6 @@ DOMAIN = "dreame_airpurifier"
 SCAN_INTERVAL = 30
 
 CONF_COUNTRY = "country"
-COUNTRY_OPTIONS = ["us", "cn", "eu", "sg", "kr"]
+COUNTRY_OPTIONS = ["us", "cn", "eu", "sg", "kr", "ru"]
 
 PRESET_MODES = ["AI Purify", "Strong Purification", "Sleep Purification", "Custom Mode", "Pet Purify"]
