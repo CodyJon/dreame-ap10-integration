@@ -4,9 +4,9 @@
   "codeowners": ["@codycyr"],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://github.com/codycyr/dreame-airpurifier",
+  "documentation": "https://github.com/CodyJon/dreame-ap10-integration",
   "iot_class": "cloud_polling",
-  "issue_tracker": "https://github.com/codycyr/dreame-airpurifier/issues",
+  "issue_tracker": "https://github.com/CodyJon/dreame-ap10-integration/issues",
   "requirements": ["requests>=2.28.0"],
-  "version": "0.2.0"
+  "version": "2.1.0"
 }
