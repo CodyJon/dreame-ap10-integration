@@ -1,0 +1,39 @@
+name: Publish Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag name (for example v2.1.0)
+        required: true
+        default: v2.1.0
+      title:
+        description: Release title
+        required: true
+        default: v2.1.0
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.tag }}
+          name: ${{ inputs.title }}
+          target_commitish: main
+          generate_release_notes: true
+          body: |
+            Ships the merged AP10 naming and entity work from #3 so HACS installs pick it up instead of v2.0.0.
+
+            ## What's New
+            - Corrected AP10 entity names and property mappings (fixes #2)
+            - Mode labels match the device/app: AI Purify, Strong Purification, Sleep Purification, Custom Mode, Pet Purify
+            - Replaced incorrect ionizer / LED / buzzer mappings with verified AP10 controls
+            - New sensors: filter days left, device location
+            - New controls: light color, voice interaction volume, timer, keypress tone, play mode, voice interaction, filter reset
+
+            Thanks @Mika255 for #3.
